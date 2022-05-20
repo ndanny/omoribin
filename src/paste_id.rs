@@ -1,4 +1,5 @@
-use rand::{Rng};
+use crate::constants::ID_SIZE;
+use rand::Rng;
 use rocket::request::FromParam;
 use std::borrow::Cow;
 use std::path::{Path, PathBuf};
@@ -36,12 +37,13 @@ impl<'a> FromParam<'a> for PasteId<'a> {
     type Error = &'a str;
 
     fn from_param(param: &'a str) -> Result<Self, Self::Error> {
-        let satisfies_blocklist= true;
-        let satisifes_len = param.len() >= 16;
+        let satisifes_len = param.len() >= ID_SIZE;
         let satisfies_type =
             param.chars().all(|c| c.is_ascii_alphanumeric());
+        let satisfies_identity =
+            Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/", "upload")).exists();
 
-        match satisfies_blocklist && satisifes_len && satisfies_type {
+        match satisifes_len && satisfies_type && satisfies_identity {
             true => Ok(PasteId(param.into())),
             false => Err(param)
         }
