@@ -34,14 +34,15 @@ impl PasteId<'_> {
 impl<'a> FromParam<'a> for PasteId<'a> {
     type Error = &'a str;
 
-    /// Todos:
-    /// - Validate the length the PasteId (param)
-    /// - Validate the existence of the paste file
-    /// - Check the paste file against a list of blocklisted files
     fn from_param(param: &'a str) -> Result<Self, Self::Error> {
-        param.chars()
-            .all(|c| c.is_ascii_alphanumeric())
-            .then(|| PasteId(param.into()))
-            .ok_or(param)
+        let satisfies_blocklist= true;
+        let satisifes_len = param.len() >= 24;
+        let satisfies_type =
+            !param.chars().all(|c| c.is_ascii_alphanumeric());
+
+        match satisfies_blocklist && satisifes_len && satisfies_type {
+            true => Ok(PasteId(param.into())),
+            false => Err(param)
+        }
     }
 }
