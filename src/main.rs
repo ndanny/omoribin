@@ -13,18 +13,7 @@ use rocket::tokio::fs::{File, self};
 
 #[get("/")]
 fn index() -> &'static str {
-    "
-    USAGE
-    
-        POST /
-
-            accepts raw data from the request body and responds
-            with a url of the paste
-
-        GET /<id>
-
-            retrieves content for paste <id>
-    "
+    ""
 }
 
 #[get("/<id>")]
