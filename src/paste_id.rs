@@ -5,6 +5,7 @@ use std::path::{Path, PathBuf};
 
 /// We could optimize this to create PasteIds that
 /// do not create potential collisions as the service scales.
+#[derive(UriDisplayPath)]
 pub struct PasteId<'a>(Cow<'a, str>);
 
 impl PasteId<'_> {
@@ -36,9 +37,9 @@ impl<'a> FromParam<'a> for PasteId<'a> {
 
     fn from_param(param: &'a str) -> Result<Self, Self::Error> {
         let satisfies_blocklist= true;
-        let satisifes_len = param.len() >= 24;
+        let satisifes_len = param.len() >= 16;
         let satisfies_type =
-            !param.chars().all(|c| c.is_ascii_alphanumeric());
+            param.chars().all(|c| c.is_ascii_alphanumeric());
 
         match satisfies_blocklist && satisifes_len && satisfies_type {
             true => Ok(PasteId(param.into())),
