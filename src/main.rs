@@ -3,8 +3,9 @@ extern crate rocket;
 
 mod paste_id;
 
-use rocket::{Rocket, Build};
 use paste_id::PasteId;
+use rocket::{Rocket, Build};
+use rocket::tokio::fs::File;
 
 #[get("/")]
 fn index() -> &'static str {
@@ -22,8 +23,13 @@ fn index() -> &'static str {
     "
 }
 
+#[get("/<id>")]
+async fn retrieve(id: PasteId<'_>) -> Option<File> {
+    File::open(id.file_path()).await.ok()
+}
+
 #[launch]
 fn rocket() -> Rocket<Build> {
     rocket::build()
-        .mount("/", routes![index])
+        .mount("/", routes![index, retrieve])
 }
