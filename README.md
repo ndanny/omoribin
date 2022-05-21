@@ -20,21 +20,34 @@ Although you can visit `http://localhost:8000` to use the web interface version,
 
 ## APIs
 ### `GET`
-`curl http://localhost:8000/<paste_id>`
-
 Returns the content of the associated paste.
 
-### `POST`
-`echo "hello, rustacean" | curl --data-binary @- http://localhost:8000/new`
+|         |                                         |
+|---------|-----------------------------------------|
+| API     | /<paste_id>                             |
+| Example | `curl http://localhost:8000/<paste_id>` |
 
+### `POST`
 Creates a new paste from the data in the request body and returns the URL and paste_id.
 
-### `PUT`
-`echo "goodbye, rustacean" | curl -X PUT --data-binary @- http://localhost:8000/replace/<paste_id>`
+|                           |                                                                   |
+|---------------------------|-------------------------------------------------------------------|
+| API                       | /new                                                              |
+| Example (from raw string) | `echo "hello" \| curl --data-binary @- http://localhost:8000/new` |
+| Example (from file)       | `curl -d @/User/me/file.txt http://localhost:8000/new`            |
 
+### `PUT`
 Replaces the existing paste on the file system with content from the new paste.
 
-### `DELETE`
-`curl -X "DELETE" http://localhost:8000/delete/<paste_id>`
+|                           |                                                                                         |
+|---------------------------|-----------------------------------------------------------------------------------------|
+| API                       | /replace/<paste_id>                                                                     |
+| Example (from raw string) | `echo "hello" \| curl -X PUT --data-binary @- http://localhost:8000/replace/<paste_id>` |
 
+### `DELETE`
 Deletes the paste if the given paste_id exists.
+
+|         |                                                            |
+|---------|------------------------------------------------------------|
+| API     | /delete/<paste_id>                                         |
+| Example | `curl -X "DELETE" http://localhost:8000/delete/<paste_id>` |
