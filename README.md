@@ -4,9 +4,9 @@
   <img src="/images/omori.gif" height=200 />
 </div>
 
-Omoribin is a web service written in Rust using the Rocket web framework. It has just enough features to function like a mini pastebin, so it's currently functional but has a lot of potential to adopt custom features.
+Omoribin is a web service written in Rust using the Rocket web framework. It has just enough features to function like a mini pastebin, but it's minimal enough to have a lot of potential to grow and adopt custom features.
 
-The cool thing about being written in Rust is that Omoribin is super fast, secure, and safe. For instance, Rust's features allows Omoribin to be protected against [full path disclosure vulnerabilities](https://owasp.org/www-community/attacks/Full_Path_Disclosure).
+The cool thing about being written in Rust is that Omoribin is fast, secure, and safe. For instance, Rust's features allows Omoribin to be protected against [full path disclosure vulnerabilities](https://owasp.org/www-community/attacks/Full_Path_Disclosure).
 
 It's worth noting that any pastes will be stored within generated files on your system so that they persist.
 
