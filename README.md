@@ -25,9 +25,14 @@ Although you can visit `http://localhost:8000` to use the web interface version,
 Returns the content of the associated paste.
 
 ### `POST`
-`echo "hello, rustaceans!" | curl --data-binary @- http://localhost:8000/new`
+`echo "hello, rustacean" | curl --data-binary @- http://localhost:8000/new`
 
 Creates a new paste from the data in the request body and returns the URL and paste_id.
+
+### `PUT`
+`echo "goodbye, rustacean" | curl -X PUT --data-binary @- http://localhost:8000/replace/<paste_id>`
+
+Replaces the existing paste on the file system with content from the new paste.
 
 ### `DELETE`
 `curl -X "DELETE" http://localhost:8000/delete/<paste_id>`

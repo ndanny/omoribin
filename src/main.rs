@@ -6,10 +6,10 @@ mod paste_id;
 
 use constants::ID_SIZE;
 use paste_id::PasteId;
-use rocket::{Build, Data, Rocket};
 use rocket::data::ToByteUnit;
 use rocket::http::uri::Absolute;
-use rocket::tokio::fs::{File, self};
+use rocket::tokio::fs::{self, File};
+use rocket::{Build, Data, Rocket};
 
 #[get("/")]
 fn index() -> &'static str {
@@ -25,7 +25,10 @@ async fn retrieve(id: PasteId<'_>) -> Option<File> {
 async fn save(paste: Data<'_>) -> std::io::Result<String> {
     let id = PasteId::new(ID_SIZE);
     let host: Absolute<'static> = uri!("http://localhost:8000");
-    paste.open(128.kibibytes()).into_file(id.file_path()).await?;
+    paste
+        .open(128.kibibytes())
+        .into_file(id.file_path())
+        .await?;
 
     Ok(uri!(host, retrieve(id)).to_string())
 }
@@ -35,8 +38,18 @@ async fn delete(id: PasteId<'_>) -> Option<()> {
     fs::remove_file(id.file_path()).await.ok()
 }
 
+#[put("/replace/<id>", data = "<paste>")]
+async fn replace(id: PasteId<'_>, paste: Data<'_>) -> std::io::Result<String> {
+    let host: Absolute<'static> = uri!("http://localhost:8000");
+    paste
+        .open(128.kibibytes())
+        .into_file(id.file_path())
+        .await?;
+
+    Ok(uri!(host, retrieve(id)).to_string())
+}
+
 #[launch]
 fn rocket() -> Rocket<Build> {
-    rocket::build()
-        .mount("/", routes![index, retrieve, save, delete])
+    rocket::build().mount("/", routes![index, retrieve, save, delete, replace])
 }
