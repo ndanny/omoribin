@@ -3,6 +3,7 @@ extern crate rocket;
 
 mod constants;
 mod paste_id;
+mod todo;
 
 use constants::ID_SIZE;
 use paste_id::PasteId;
