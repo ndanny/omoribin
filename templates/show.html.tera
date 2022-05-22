@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Omoribin - Store your pastes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      margin: auto;
+    }
+
+    .everything {
+      text-align: center;
+      margin-top: 6.25rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="everything" align="center">
+    <h2>Showing Paste</h2>
+    <br />
+    <p>{{error}}</p>
+    <p>{{paste}}</p>
+  </div>
+</body>
+
+</html>
