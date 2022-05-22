@@ -1,1 +1,33 @@
-<h1>Home</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Omoribin - Store your pastes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      margin: auto;
+    }
+
+    .intro {
+      text-align: center;
+      margin-top: 6.25rem;
+      margin-bottom: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="intro" align="center">
+    <h2>Omoribin</h2>
+    <form name="create-paste" action="/new" method="post">
+      <textarea name="data" id="data" rows="15" cols="60">Paste some text here.</textarea>
+      <br />
+      <input type="submit" value="Create Paste" />
+    </form>
+  </div>
+</body>
+
+</html>
