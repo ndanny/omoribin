@@ -95,10 +95,7 @@ async fn delete_api(id: PasteId<'_>) -> Option<()> {
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![index, show_paste])
-        .mount(
-            "/api",
-            routes![create_api, read_api, update_api, delete_api],
-        )
+        .mount("/api", routes![create_api, read_api, update_api, delete_api])
         .register("/", catchers![not_found])
         .attach(Template::fairing())
 }
