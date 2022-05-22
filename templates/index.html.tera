@@ -3,7 +3,7 @@
 {% block content %}
   <h2>Omoribin</h2>
   <br />
-  <form name="create-paste" action="/new" method="post">
+  <form name="create-paste" action="/create" method="post">
     <textarea name="data" id="data" rows="15" cols="60">Paste some text here.</textarea>
     <br />
     <input type="submit" value="Create Paste" />
