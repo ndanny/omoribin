@@ -10,11 +10,12 @@ use paste_id::PasteId;
 use rocket::data::ToByteUnit;
 use rocket::http::uri::Absolute;
 use rocket::tokio::fs::{self, File};
-use rocket::{Build, Data, Rocket};
+use rocket::{Data, Request};
+use rocket_dyn_templates::{context, Template};
 
 #[get("/")]
-fn index() -> &'static str {
-    ""
+fn index() -> Template {
+    Template::render("index", context! {})
 }
 
 #[get("/<id>")]
@@ -50,7 +51,20 @@ async fn replace(id: PasteId<'_>, paste: Data<'_>) -> std::io::Result<String> {
     Ok(uri!(host, retrieve(id)).to_string())
 }
 
+#[catch(404)]
+pub fn not_found(req: &Request<'_>) -> Template {
+    Template::render(
+        "error/404",
+        context! {
+            uri: req.uri()
+        },
+    )
+}
+
 #[launch]
-fn rocket() -> Rocket<Build> {
-    rocket::build().mount("/", routes![index, retrieve, save, delete, replace])
+fn rocket() -> _ {
+    rocket::build()
+        .mount("/", routes![index, retrieve, save, delete, replace])
+        .register("/", catchers![not_found])
+        .attach(Template::fairing())
 }
