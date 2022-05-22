@@ -11,17 +11,17 @@
       margin: auto;
     }
 
-    .intro {
+    .everything {
       text-align: center;
       margin-top: 6.25rem;
-      margin-bottom: 3rem;
     }
   </style>
 </head>
 
 <body>
-  <div class="intro" align="center">
+  <div class="everything" align="center">
     <h2>Omoribin</h2>
+    <br />
     <form name="create-paste" action="/new" method="post">
       <textarea name="data" id="data" rows="15" cols="60">Paste some text here.</textarea>
       <br />
