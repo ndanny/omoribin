@@ -3,9 +3,21 @@
 {% block content %}
 <h2>Omoribin</h2>
 <br />
-<form name="create-paste" action="/create" method="post">
-  <textarea name="data" id="data" rows="15" cols="60" class="create-paste-box">Paste goes here.</textarea>
+<div align="center">
+  <form name="create-paste" action="/create" method="post">
+    <textarea name="data" id="data" rows="15" cols="60" class="create-paste-box">Paste goes here.</textarea>
+    <br />
+    <input type="submit" value="Create Paste" class="create-button" />
+  </form>
   <br />
-  <input type="submit" value="Create Paste" class="create-button" />
-</form>
+  <div class="recent-pastes">
+    <h3>Recent Pastes</h3>
+    <ul>
+      {% for f in files %}
+      {% set link = "/show/" ~ f %}
+      <li><a href={{ link }} />> {{ f }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 {% endblock content %}

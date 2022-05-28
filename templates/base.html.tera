@@ -11,9 +11,22 @@
             margin: auto;
         }
 
+        h3 {
+            margin: 0;
+        }
+
         a {
-            color: black;
+            color: rgb(0, 140, 255);
             text-decoration: none;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0
+        }
+
+        li {
+            margin: 0.5em 0 0.5em 0;
         }
 
         .everything {
@@ -25,7 +38,7 @@
             background-color: rgb(234, 234, 234);
             border-radius: .5em;
             border: 1px solid #949494;
-            padding: 0.5em;
+            padding: 1em;
             margin: 0.5em;
         }
 
@@ -47,10 +60,21 @@
             background-color: rgb(234, 234, 234);
             width: 500px;
             height: auto;
-            padding: 0.5em;
+            padding: 1em;
             margin: 2em;
             text-align: left;
-            border-radius: .5em;
+            border-radius: 0.5em;
+        }
+
+        .recent-pastes {
+            width: 500px;
+            height: auto;
+            padding: 1em;
+            margin: 2em;
+            text-align: left;
+            border-radius: 0.5em;
+            background-color: rgb(44, 44, 44);
+            color: #ffffff;
         }
     </style>
 </head>

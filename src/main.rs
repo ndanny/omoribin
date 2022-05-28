@@ -22,8 +22,14 @@ struct Paste<'r> {
 }
 
 #[get("/")]
-fn index() -> Template {
-    Template::render("index", context! {})
+async fn index() -> Template {
+    let files: Vec<String> = std::fs::read_dir("pastes/")
+        .unwrap()
+        .map(|res| res.unwrap().file_name().into_string().unwrap())
+        .filter(|name| !name.contains(".ignore"))
+        .collect();
+
+    Template::render("index", context! { files: files })
 }
 
 #[catch(404)]
