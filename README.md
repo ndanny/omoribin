@@ -18,7 +18,7 @@ Pastes are stored within generated files on your system so that they persist.
 
 
 ## UI
-Although you can visit `http://localhost:8000` to use the web interface version, there isn't much to see. I'm planning on adding a UI soon. For now, you'll just have to use the APIs below.
+Happy to announce that there is a functioning UI now! It's very minimal, but you can create the pastes and view pastes in your web browser. Just visit `http://localhost:8000`.
 
 ## APIs
 | API | Description | Examples |
