@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 rand = "0.8.5"
 rocket = "0.5.0-rc.2"
+serde = "1.0.137"
 
 [dependencies.rocket_dyn_templates]
 features = ["tera"]
