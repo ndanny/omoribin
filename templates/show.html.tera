@@ -1,8 +1,12 @@
 {% extends "base" %}
 
 {% block content %}
-  <h2>Showing Paste</h2>
-  <br />
-  <p>{{error}}</p>
-  <p>{{paste}}</p>
+<h2>Showing Paste</h2>
+<a href="/">&#x2190; Back</a>
+<br />
+{% if error %}
+<p>There was a problem loading the paste T__T</p>
+{% else %}
+<p>{{paste}}</p>
+{% endif %}
 {% endblock content %}

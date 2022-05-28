@@ -43,7 +43,7 @@ async fn show_paste(id: PasteId<'_>) -> Template {
         "show",
         context! {
             paste: content,
-            error: error
+            error: error,
         },
     )
 }
