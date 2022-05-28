@@ -38,14 +38,13 @@ impl<'a> FromParam<'a> for PasteId<'a> {
 
     fn from_param(param: &'a str) -> Result<Self, Self::Error> {
         let satisifes_len = param.len() >= ID_SIZE;
-        let satisfies_type =
-            param.chars().all(|c| c.is_ascii_alphanumeric());
+        let satisfies_type = param.chars().all(|c| c.is_ascii_alphanumeric());
         let satisfies_identity =
             Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/", "pastes")).exists();
 
         match satisifes_len && satisfies_type && satisfies_identity {
             true => Ok(PasteId(param.into())),
-            false => Err(param)
+            false => Err(param),
         }
     }
 }

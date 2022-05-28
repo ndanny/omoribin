@@ -8,11 +8,18 @@ mod todo;
 use constants::ID_SIZE;
 use paste_id::PasteId;
 use rocket::data::ToByteUnit;
+use rocket::form::Form;
 use rocket::http::uri::Absolute;
 use rocket::response::Redirect;
 use rocket::tokio::fs::{self, File};
 use rocket::{Data, Request};
 use rocket_dyn_templates::{context, Template};
+use std::io::prelude::*;
+
+#[derive(FromForm)]
+struct Paste<'r> {
+    data: &'r str,
+}
 
 #[get("/")]
 fn index() -> Template {
@@ -49,13 +56,17 @@ async fn show_paste(id: PasteId<'_>) -> Template {
 }
 
 #[post("/create", data = "<paste>")]
-async fn create_paste(paste: Data<'_>) -> Redirect {
+async fn create_paste(paste: Form<Paste<'_>>) -> Redirect {
     let id = PasteId::new(ID_SIZE);
+    let paste_bytes = paste.data.as_bytes();
 
-    match paste.open(128.kibibytes()).into_file(id.file_path()).await {
-        Ok(_) => return Redirect::to(uri!("/", show_paste(id))),
+    match std::fs::File::create(id.file_path()) {
+        Ok(mut file) => match file.write_all(paste_bytes) {
+            Ok(_) => return Redirect::to(uri!("/", show_paste(id))),
+            Err(_) => return Redirect::to(uri!("/", index())),
+        },
         Err(_) => return Redirect::to(uri!("/", index())),
-    };
+    }
 }
 
 #[post("/v1/create", data = "<paste>")]
