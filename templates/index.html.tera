@@ -1,11 +1,11 @@
 {% extends "base" %}
 
 {% block content %}
-  <h2>Omoribin</h2>
+<h2>Omoribin</h2>
+<br />
+<form name="create-paste" action="/create" method="post">
+  <textarea name="data" id="data" rows="15" cols="60" class="create-paste-box">Paste goes here.</textarea>
   <br />
-  <form name="create-paste" action="/create" method="post">
-    <textarea name="data" id="data" rows="15" cols="60">Paste some text here.</textarea>
-    <br />
-    <input type="submit" value="Create Paste" />
-  </form>
+  <input type="submit" value="Create Paste" class="create-button" />
+</form>
 {% endblock content %}

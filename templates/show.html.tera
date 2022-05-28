@@ -7,6 +7,10 @@
 {% if error %}
 <p>There was a problem loading the paste T__T</p>
 {% else %}
-<p>{{paste}}</p>
+<div align="center">
+    <div class="show-paste-box">
+        <pre>{{paste}}</pre>
+    </div>
+</div>
 {% endif %}
 {% endblock content %}

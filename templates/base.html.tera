@@ -11,14 +11,46 @@
             margin: auto;
         }
 
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
         .everything {
             text-align: center;
             margin-top: 6.25rem;
         }
 
-        a {
-            color: black;
-            text-decoration: none;
+        .create-paste-box {
+            background-color: rgb(234, 234, 234);
+            border-radius: .5em;
+            border: 1px solid #949494;
+            padding: 0.5em;
+            margin: 0.5em;
+        }
+
+        .create-paste-box:focus {
+            outline: none !important;
+        }
+
+        .create-button {
+            box-shadow: none;
+            border: none;
+            padding: 1em;
+            border-radius: 0.5em;
+            background-color: black;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .show-paste-box {
+            background-color: rgb(234, 234, 234);
+            width: 500px;
+            height: auto;
+            padding: 0.5em;
+            margin: 2em;
+            text-align: left;
+            border-radius: .5em;
         }
     </style>
 </head>
